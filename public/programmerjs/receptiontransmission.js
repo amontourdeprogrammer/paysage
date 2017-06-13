@@ -43,10 +43,15 @@ var Paysage = Paysage || {};
                          event.preventDefault();
                          Paysage.requestCode(playgroundId, objectId);
                      });
-                 return $('<li>').append($item);
+                 var $delete = $("<a href='#'>").text("  (x)");
+                 console.log $('<li>').append($item).append($delete);
              }));
      });
-
+//$delete.click(
+  //function 
+  //$('<li>').remove;
+  //)
+  
   io.on('source code',
      function showCodeReceived (data) {
          $("#playgroundid").val(data.playgroundId);
