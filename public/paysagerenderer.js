@@ -56,7 +56,10 @@ var updateObject = function (id, code) {
     delete sketch[id];
   }
   code = rewriteBackgroundTransparent(code);
-  sketch[id] = new Processing(canvas[id], code);
+  try{
+    sketch[id] = new Processing(canvas[id], code);  
+  } catch(e) { console.log("Sketch error" + e); }
+  
   resize(sketch[id]);
 };
 
