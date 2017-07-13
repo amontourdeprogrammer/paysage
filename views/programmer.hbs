@@ -7,6 +7,8 @@
   <script src="{{socketioClient}}"></script>
   <script src="/bower_components/jquery/dist/jquery.min.js"></script>
   <script src="/bower_components/chance/chance.js"></script>
+  <script src="/bower_components/ace-builds/src-min-noconflict/ace.js" type="text/javascript" charset="utf-8"></script>
+
 </head>
 <body>
 <div class="programmer-part">
@@ -15,7 +17,7 @@
     <input type="text" id="codeid"></input>
   </div>
   <div class="codewrapper">
-    <textarea id="code" rows="20" cols="30"></textarea>
+    <div id="code" rows="20" cols="30"></div>
   </div>
   <div class="programmercontrols">
     <div>

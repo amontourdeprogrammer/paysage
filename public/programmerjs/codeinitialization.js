@@ -11,7 +11,15 @@ Paysage.createCodeId = function () {
   Paysage.setCodeId(chance.word());
 }
 
-// on load generating a random name if no name is passed via the URL Fragmemt identifier
+Paysage.getCode = function() {
+  return $('#code').val();
+}
+
+Paysage.setCode = function(code) {
+  $('#code').val(code);
+}
+
+// On load, generating a random name if no name is passed via the URL Fragmemt identifier
 
 Paysage.programmerInit = function () {
   if (window.location.hash) {
@@ -21,20 +29,34 @@ Paysage.programmerInit = function () {
   }
 
   setupDragAndDropListeners();
-};
 
+  // Initialize ACE code editor
+  $('#code').each(function () {
+    var editor = ace.edit(this);
+    editor.getSession().setMode("ace/mode/java");
+    editor.setShowPrintMargin(false);
+    editor.$blockScrolling = Infinity; // to avoid the warning about deprecated scrolling https://github.com/ajaxorg/ace/issues/2499
+    Paysage.getCode = function() {
+      return editor.getValue();
+    }
 
-// loading code from an example and generating a random name
+    Paysage.setCode = function(code) {
+      editor.setValue(code, -1);
+    }
+  });
+}
+
+// Loading code from an example and generating a random name
 
 $('.example').click(function() {
   Paysage.createCodeId();
   $.get($(this).data('src'), function(data) {
-    $('#code').val(data);
+    Paysage.setCode(data);
   });
 });
 
-// drag and dropping a text file and naming the code from the file name
-// thanks http://stackoverflow.com/questions/12214057/drag-n-drop-text-file
+// Drag and dropping a text file and naming the code from the file name
+// Thanks http://stackoverflow.com/questions/12214057/drag-n-drop-text-file
 // (after trying to use http://filedropjs.org/ )
 
 function handleFileSelect(evt) {
